@@ -31,3 +31,8 @@ function def { (Get-Command $args[0]).Definition }
 
 function path { ($env:PATH).Replace(';',"`n") }
 
+Set-Alias alias Set-Alias
+
+# Network
+
+alias flushdns Clear-DnsClientCache
