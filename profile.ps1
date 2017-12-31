@@ -14,7 +14,9 @@ function vimprofile { vim $env:PSProfile }
 
 function version {
 	cd ($env:CDPATH + "\ps")
-	(git log --pretty=oneline 2>$null | measure-object -Line).Lines	
+	$majmin = git describe --abbrev=0 --tags 2>$null
+	$patch = (git log --pretty=oneline "$majmin.." 2>$null | measure-object -Line).Lines
+	echo $majmin"."$patch
 	git diff
 }
 
