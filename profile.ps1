@@ -4,17 +4,11 @@ $env:CDPATH = $env:GOPATH+"\src\github.com\voutasaurus"
 # The location of this file:
 $env:PSProfile = $env:CDPATH+"\ps\profile.ps1"
 
-function profile {
-	echo $env:PSProfile
-}
+function profile { echo $env:PSProfile }
 
-function .. {
-	. $env:PSProfile
-}
+function .. { . $env:PSProfile }
 
-function vimprofile {
-	vim $env:PSProfile
-}
+function vimprofile { vim $env:PSProfile }
 
 function version {
 	cd ($env:CDPATH + "\ps")
@@ -25,6 +19,12 @@ function version {
 function cdw { cd ($env:GOPATH + "\src\github.com\voutasaurus") }
 
 # environment
-function which($command) { get-command $command }
+
+# mock for which in bash
+function which { (Get-Command $args[0]).Source }
+
+# like type in bash (the word type is taken)
+function def { (Get-Command $args[0]).Definition }
+
 function path { ($env:PATH).Replace(';',"`n") }
 
